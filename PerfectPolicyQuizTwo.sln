@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfectPolicyQuizTwo", "PerfectPolicyQuizTwo.csproj", "{2B38412C-109D-46F6-876D-618C5A773F02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2B38412C-109D-46F6-876D-618C5A773F02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B38412C-109D-46F6-876D-618C5A773F02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B38412C-109D-46F6-876D-618C5A773F02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B38412C-109D-46F6-876D-618C5A773F02}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {47064020-EDEA-46B1-ADB5-7C4E5A3614D5}
+	EndGlobalSection
+EndGlobal
