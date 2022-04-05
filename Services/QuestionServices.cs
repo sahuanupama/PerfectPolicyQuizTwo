@@ -1,4 +1,5 @@
 ﻿using PerfectPolicyQuizTwo.Models;
+using PerfectPolicyQuizTwo.Models.QuestionModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace PerfectPolicyQuestionTwo.Services
                 ConfigureClient();
             }
 
-            HttpResponseMessage response = _client.PostAsJsonAsync("Question", questions).Result;
+            HttpResponseMessage response = _client.PostAsJsonAsync("Question", question).Result;
 
         }
 

@@ -1,9 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PerfectPolicyQuizTwo.Models;
+using PerfectPolicyQuizTwo.Models.QuestionModel;
+using PerfectPolicyQuizTwo.Models.QuizModel;
+using PerfectPolicyQuizTwo.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +29,15 @@ namespace PerfectPolicyQuizTwo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDistributedMemoryCache();
+            //services.AddController<IApiRequest<Quiz>, ApiRequest<Quiz>>();
+
+
+            services.AddSingleton<HttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IApiRequest<Question>, ApiRequest<Question>>();
+
+            services.AddSingleton<IApiRequest<Quiz>, ApiRequest<Quiz>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

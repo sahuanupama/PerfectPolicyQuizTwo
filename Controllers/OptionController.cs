@@ -29,8 +29,6 @@ namespace PerfectPolicyQuizTwo.Controllers
             }
 
             return View(options);
-
-            return View();
         }
 
         // GET: OptionController/Details/5

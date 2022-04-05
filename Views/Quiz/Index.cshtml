@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PerfectPolicyQuizTwo.Models.Quiz>
+﻿@model IEnumerable<PerfectPolicyQuizTwo.Models.QuizModel.Quiz>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,6 +9,12 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
+@using (Html.BeginForm("Filter", "Quiz", FormMethod.Post))
+{
+    <select asp-items="@ViewBag.QuizDDL" name="QuizDDL"></select>
+    <inputtype ="submit" value="submit" />
+}
 <table class="table">
     <thead>
         <tr>
@@ -34,32 +40,36 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.quizId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.quizTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.quizdate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.quizpresonName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.quizPassNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.questionNumber)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quizId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quizTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quizdate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quizpresonName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quizPassNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.questionNumber)
+                </td>
+                <td>
+                    @Html.ActionLink("Question", "QuestionForQuiz", "Quiz", new { id = item.quizId }, new { @Question = "btn btn-primary" })
+                <td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.quizId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.quizId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.quizId })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PerfectPolicyQuizTwo.Models;
+using PerfectPolicyQuizTwo.Models.QuestionModel;
+using PerfectPolicyQuizTwo.Models.QuizModel;
+using PerfectPolicyQuizTwo.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,44 +15,87 @@ namespace PerfectPolicyQuizTwo.Controllers
 {
     public class QuestionController : Controller
     {
+        private readonly IApiRequest<Question> _apiQuestionRequest;
+
+        private readonly IApiRequest<Quiz> _apiQuizRequest;
+
+        private readonly string questionController = "Question";
+
+
+
+        public QuestionController(IApiRequest<Question> apiQuestionRequest, IApiRequest<Quiz> apiQuizRequest)
+        {
+            _apiQuestionRequest = apiQuestionRequest;
+            _apiQuizRequest = apiQuizRequest;
+        }
+
+
         // GET: QuestionController
         public ActionResult Index()
         {
+            List<Question> question = _apiQuestionRequest.GetAll("Question");
 
-            List<Question> questions = new();
-            using (HttpClient client = new HttpClient())
-            {
-                HttpResponseMessage Response = client.GetAsync("https://localhost:44395/api/Question").Result;
-                questions = Response.Content.ReadAsAsync<List<Question>>().Result;
-            }
+            return View(question);
+            // List<Question> questions = new();
+            //using (HttpClient client = new HttpClient())
+            //{
+            //  HttpResponseMessage Response = client.GetAsync("https://localhost:44395/api/Question").Result;
+            //questions = Response.Content.ReadAsAsync<List<Question>>().Result;
+            //}
 
-            if (questions == null)
-            {
-                return View("Error");
-            }
-            return View(questions);
-            return View();
+            //if (questions == null)
+            //{
+            //    return View("Error");
+            //}
+            //return View(questions);
+            //return View();
         }
+
+        public ActionResult QuestionForQuiz(int id)
+        {
+            List<Question> Question = _apiQuestionRequest.GetAllForParentId(questionController, "QuestionForQuizId", id);
+            return View("Index", Question);
+        }
+
 
         // GET: QuestionController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Question question = _apiQuestionRequest.GetSingle(questionController, id);
+            return View("Index", question);
         }
 
         // GET: QuestionController/Create
         public ActionResult Create()
         {
+            var question = _apiQuestionRequest.GetAll("Question");
+
+            var QuestionDropDownListModel = question.Select(c => new SelectListItem
+            {
+                Text = c.questionToipc,
+                Value = c.questionId.ToString()
+            }).ToList();
+
+            ViewBag.QuestionDropDown = QuestionDropDownListModel;
+
+            ViewData.Add("questionDDL", QuestionDropDownListModel);
+
+            TempData.Add("questionDDL", QuestionDropDownListModel);
+
             return View();
         }
 
         // POST: QuestionController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Question question)
         {
             try
             {
+                question.questionId = 0;
+
+                _apiQuestionRequest.Create("Question", question);
+
                 return RedirectToAction(nameof(Index));
             }
             catch

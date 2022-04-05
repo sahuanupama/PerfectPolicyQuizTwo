@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PerfectPolicyQuizTwo.Models;
+using PerfectPolicyQuizTwo.Models.QuestionModel;
+using PerfectPolicyQuizTwo.Models.QuizModel;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
@@ -16,23 +18,15 @@ namespace PerfectPolicyQuizTwo.Controllers
             _logger = logger;
         }
 
-
-        
-
-
         public IActionResult Index()
         {
-           return View();
+            return View();
         }
 
         public IActionResult Privacy()
         {
             return View();
         }
-
-
-
-
 
         public IActionResult Quiz()
         {
@@ -44,7 +38,7 @@ namespace PerfectPolicyQuizTwo.Controllers
                 quizzes = Response.Content.ReadAsAsync<List<Quiz>>().Result;
             }
 
-            if(quizzes == null)
+            if (quizzes == null)
             {
                 return View("Error");
             }
@@ -57,11 +51,9 @@ namespace PerfectPolicyQuizTwo.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
-
         public IActionResult Question()
         {
-            List<Question> questions = new();
+            List<Models.QuestionModel.Question> questions = new();
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage Response = client.GetAsync("https://localhost:44395/api/Question").Result;
@@ -75,7 +67,6 @@ namespace PerfectPolicyQuizTwo.Controllers
             return View(questions);
         }
 
-       
         public IActionResult Option()
         {
             List<Option> options = new();
@@ -91,9 +82,13 @@ namespace PerfectPolicyQuizTwo.Controllers
             }
 
             return View(options);
+
         }
 
 
-    }
 
+
+
+
+    }
 }

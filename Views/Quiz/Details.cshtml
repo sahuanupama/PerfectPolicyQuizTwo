@@ -1,0 +1,54 @@
+﻿@model PerfectPolicyQuizTwo.Models.QuizModel.Quiz
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Quiz</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.quizId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.quizId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.quizTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.quizTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.quizdate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.quizdate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.quizpresonName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.quizpresonName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.quizPassNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.quizPassNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.questionNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.questionNumber)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
