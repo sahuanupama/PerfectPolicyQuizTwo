@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using PerfectPolicyQuizTwo.Helper;
 using PerfectPolicyQuizTwo.Models;
 using PerfectPolicyQuizTwo.Models.QuestionModel;
 using PerfectPolicyQuizTwo.Models.QuizModel;
@@ -112,103 +113,107 @@ namespace PerfectPolicyQuizTwo.Controllers
                 return View();
             }
         }
-        /*
-                // GET: QuizController/Edit/5
-                public ActionResult Edit(int id)
+
+        // GET: QuizController/Edit/5
+        public ActionResult Edit(int id)
+        {
+            try
+            {
+                /* if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+                 {
+                     return RedirectToAction("Login", "Auth");
+                 }*/
+                Quiz quiz = _apiQuizRequest.GetSingle(quizController, id);
+
+                return View(quiz);
+
+            }
+            catch
+            {
+                return View();
+            }
+
+        }
+
+        // POST: QuizController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Quiz quiz)
+        {
+            try
+            {
+                /*if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
                 {
-                    try
-                    {
-                        if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
-                        {
-                            return RedirectToAction("Login", "Auth");
-                        }
-                        Quiz quiz = _apiRequest.GetSingle(quizController, id);
-
-                        return View(quiz);
-
-                    }
-                    return View();
+                    return RedirectToAction("Login", "Auth");
                 }
-
-                // POST: QuizController/Edit/5
-                [HttpPost]
-                [ValidateAntiForgeryToken]
-                public ActionResult Edit(int id, IFormCollection collection)
-                {
-                    try
-                    {
-                        if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
-                        {
-                            return RedirectToAction("Login", "Auth");
-                        }
-
-                        _apiRequest.Edit(quizController, quiz, id);
+*/
+                _apiQuizRequest.Edit(quizController, quiz, id);
 
 
-                        return RedirectToAction(nameof(Index));
-                    }
-                    catch
-                    {
-                        return View();
-                    }
-                }
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
-                // GET: QuizController/Delete/5
-                public ActionResult Delete(int id)
-                {
-                    if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
-                    {
-                        return RedirectToAction("Login", "Auth");
-                    }
+        // GET: QuizController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+            {
+                return RedirectToAction("Login", "Auth");
+            }
 
-                    Quiz quiz _apiRequest.GetSingle(quizController, id);
+            Quiz quiz = _apiQuizRequest.GetSingle(quizController, id);
 
-                    return View(quiz);
-                }
+            return View(quiz);
+        }
 
-                // POST: QuizController/Delete/5
-                [HttpPost]
-                [ValidateAntiForgeryToken]
-                public ActionResult Delete(int id, IFormCollection collection)
-                {
-                    try
-                    {
-                        if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
-
-                            return RedirectToAction(nameof(Index));
-                    }
-                     _apiRequest.Delete(teacherController, id);
+        // POST: QuizController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
 
                     return RedirectToAction(nameof(Index));
 
-                    catch
-                    {
-                        return View();
-                    }
-                }
+                _apiQuizRequest.Delete(quizController, id);
 
-                [HttpPost]
-                public IActionResult FilterTeacher(IFormCollection collection)
-                {
-                    // Retrieve filter text
-                    string filterText = collection["emailProvider"];
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
-                    //var teacherList = _apiRequest.GetAll(teacherController).Where(c => c.Email.Contains(filterText)).ToList();
+        [HttpPost]
+        public IActionResult FilterTeacher(IFormCollection collection)
+        {
+            // Retrieve filter text
+            string filterText = collection["emailProvider"];
 
-                    // retrieve a list of all teachers
-                    var quizList = _apiQuizRequest.GetAll(quizController);
+            //var teacherList = _apiRequest.GetAll(teacherController).Where(c => c.Email.Contains(filterText)).ToList();
 
-                    // filter that list, return the results to a new list
-                    var filteredList = quizList.Where(c => c.quizTitle.ToLower().Contains(filterText.ToLower())).ToList();
+            // retrieve a list of all teachers
+            var quizList = _apiQuizRequest.GetAll(quizController);
 
-                    // return this list to the index page
-                    return View("Index", filteredList);
+            // filter that list, return the results to a new list
+            var filteredList = quizList.Where(c => c.quizTitle.ToLower().Contains(filterText.ToLower())).ToList();
 
-                    // Very Bad
-                    //return View("Index", _apiRequest.GetAll(teacherController).Where(c => c.Email.Contains(collection["emailProvider"])).ToList());
-                }
+            // return this list to the index page
+            return View("Index", filteredList);
 
-                */
+            // Very Bad
+            //return View("Index", _apiRequest.GetAll(teacherController).Where(c => c.Email.Contains(collection["emailProvider"])).ToList());
+        }
+
+
 
     }
 }
