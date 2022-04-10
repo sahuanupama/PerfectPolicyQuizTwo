@@ -9,21 +9,22 @@ using System.Threading.Tasks;
 
 namespace PerfectPolicyQuizTwo.Controllers
 {
-    public class AuthController1 : Controller
+    public class AuthController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+
         public IActionResult Login(UserInfo user)
         {
             string token = "";
 
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44379/api/");
+                client.BaseAddress = new Uri("https://localhost:44395/api/");
 
                 var response = client.PostAsJsonAsync("Auth/GenerateToken", user).Result;
 
@@ -53,6 +54,6 @@ namespace PerfectPolicyQuizTwo.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
-
     }
+
 }

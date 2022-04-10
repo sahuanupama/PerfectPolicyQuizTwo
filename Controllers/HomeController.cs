@@ -86,9 +86,5 @@ namespace PerfectPolicyQuizTwo.Controllers
         }
 
 
-
-
-
-
     }
 }

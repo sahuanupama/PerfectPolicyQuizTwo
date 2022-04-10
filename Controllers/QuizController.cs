@@ -56,7 +56,7 @@ namespace PerfectPolicyQuizTwo.Controllers
                  return View(teacherfilteredList);
 
              }
- */
+            */
             return View(quizList);
 
             //List<Quiz> quizzes = new();
@@ -142,11 +142,11 @@ namespace PerfectPolicyQuizTwo.Controllers
         {
             try
             {
-                /*if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+                if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
                 {
                     return RedirectToAction("Login", "Auth");
                 }
-*/
+
                 _apiQuizRequest.Edit(quizController, quiz, id);
 
 
