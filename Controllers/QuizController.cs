@@ -79,7 +79,7 @@ namespace PerfectPolicyQuizTwo.Controllers
         public ActionResult Details(int id)
         {
             Quiz quiz = _apiQuizRequest.GetSingle(quizController, id);
-            return View();
+            return View(quiz);
         }
 
         // GET: QuizController/Create
@@ -119,10 +119,10 @@ namespace PerfectPolicyQuizTwo.Controllers
         {
             try
             {
-                /* if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
-                 {
-                     return RedirectToAction("Login", "Auth");
-                 }*/
+                if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+                {
+                    return RedirectToAction("Login", "Auth");
+                }
                 Quiz quiz = _apiQuizRequest.GetSingle(quizController, id);
 
                 return View(quiz);
@@ -142,11 +142,11 @@ namespace PerfectPolicyQuizTwo.Controllers
         {
             try
             {
-                /*if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+                if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
                 {
                     return RedirectToAction("Login", "Auth");
                 }
-*/
+
                 _apiQuizRequest.Edit(quizController, quiz, id);
 
 
@@ -193,7 +193,7 @@ namespace PerfectPolicyQuizTwo.Controllers
         }
 
         [HttpPost]
-        public IActionResult FilterTeacher(IFormCollection collection)
+        public IActionResult FilterQuiz(IFormCollection collection)
         {
             // Retrieve filter text
             string filterText = collection["emailProvider"];
@@ -212,7 +212,6 @@ namespace PerfectPolicyQuizTwo.Controllers
             // Very Bad
             //return View("Index", _apiRequest.GetAll(teacherController).Where(c => c.Email.Contains(collection["emailProvider"])).ToList());
         }
-
 
 
     }

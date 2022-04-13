@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PerfectPolicyQuizTwo.Controllers
 {
-    public class AuthController1 : Controller
+    public class AuthController : Controller
     {
         public IActionResult Index()
         {
@@ -24,7 +24,7 @@ namespace PerfectPolicyQuizTwo.Controllers
 
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44379/api/");
+                client.BaseAddress = new Uri("https://localhost:44395/api/");
 
                 var response = client.PostAsJsonAsync("Auth/GenerateToken", user).Result;
 

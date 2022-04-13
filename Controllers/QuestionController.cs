@@ -62,7 +62,7 @@ namespace PerfectPolicyQuizTwo.Controllers
         public ActionResult Details(int id)
         {
             Question question = _apiQuestionRequest.GetSingle(questionController, id);
-            return View("Index", question);
+            return View(question);
         }
 
         // GET: QuestionController/Create

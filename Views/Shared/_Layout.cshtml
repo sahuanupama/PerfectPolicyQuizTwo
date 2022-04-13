@@ -22,7 +22,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Privacy" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Quiz" asp-action="Index">Quiz</a>
@@ -32,6 +32,15 @@
                         </li>
                     </ul>
                 </div>
+
+                @if (Context.Session.Keys.Any(c => c.Equals("Token")))
+                {
+                    <a class="btn btn-danger" asp-controller="Auth" asp-action="Logout">Logout</a> }
+                else
+                {
+                    <a class="btn btn-primary" asp-controller="Auth" asp-action="Login">Login</a>}
+
+
             </div>
         </nav>
     </header>
