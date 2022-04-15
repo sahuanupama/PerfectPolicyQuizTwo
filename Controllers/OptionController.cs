@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Options;
 using PerfectPolicyQuizTwo.Models;
+using PerfectPolicyQuizTwo.Models.QuestionModel;
+using PerfectPolicyQuizTwo.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,86 +14,40 @@ namespace PerfectPolicyQuizTwo.Controllers
 {
     public class OptionController : Controller
     {
+        private readonly IApiRequest<Option> _apiOptionRequest;
+
+        public OptionController(IApiRequest<Option> apiOptionRequest)
+        {
+            _apiOptionRequest = apiOptionRequest;
+        }
+
+
         // GET: OptionController
         public ActionResult Index()
         {
-
-            List<Option> options = new();
-            using (HttpClient client = new HttpClient())
-            {
-                HttpResponseMessage Response = client.GetAsync("https://localhost:44395/api/Option").Result;
-                options = Response.Content.ReadAsAsync<List<Option>>().Result;
-            }
-
-            if (options == null)
-            {
-                return View();
-            }
-
+            List<Option> options = _apiOptionRequest.GetAll("Option");
             return View(options);
         }
 
-        // GET: OptionController/Details/5
+        // GET: QuestionController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Option option = _apiOptionRequest.GetSingle("Option", id);
+            return View(option);
         }
 
-        // GET: OptionController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: OptionController/Create
+        // POST: QuizController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Option option)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: OptionController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: OptionController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: OptionController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: OptionController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
+                Option newOption = new Option()
+                {
+                    OptionId = option.OptionId,
+                    OptionText = option.OptionText,
+                    OptionNumber = option.OptionNumber
+                };
                 return RedirectToAction(nameof(Index));
             }
             catch

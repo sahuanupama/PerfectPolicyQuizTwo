@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PerfectPolicyQuizTwo.Models;
 
 namespace PerfectPolicyQuizTwo
 {
@@ -45,6 +46,7 @@ namespace PerfectPolicyQuizTwo
             services.AddScoped<IApiRequest<Question>, ApiRequest<Question>>();
             //services.AddSingleton<IApiRequest<Teacher>, ApiTestRequest<Teacher>>();
             services.AddSingleton<IApiRequest<Quiz>, ApiRequest<Quiz>>();
+            services.AddSingleton<IApiRequest<Option>, ApiRequest<Option>>();
 
         }
 

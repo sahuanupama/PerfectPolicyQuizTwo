@@ -9,51 +9,47 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.optionId)
+                @Html.DisplayNameFor(model => model.OptionId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.optionText)
+                @Html.DisplayNameFor(model => model.OptionText)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.optionNumber)
+                @Html.DisplayNameFor(model => model.OptionNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.questionId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.question)
+                @Html.DisplayNameFor(model => model.QuestionId)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.optionId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.optionText)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.optionNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.questionId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.question)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OptionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OptionText)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OptionNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuestionId)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.OptionId }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

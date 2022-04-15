@@ -21,8 +21,6 @@ namespace PerfectPolicyQuizTwo.Controllers
 
         private readonly string questionController = "Question";
 
-
-
         public QuestionController(IApiRequest<Question> apiQuestionRequest, IApiRequest<Quiz> apiQuizRequest)
         {
             _apiQuestionRequest = apiQuestionRequest;
@@ -34,21 +32,7 @@ namespace PerfectPolicyQuizTwo.Controllers
         public ActionResult Index()
         {
             List<Question> question = _apiQuestionRequest.GetAll("Question");
-
             return View(question);
-            // List<Question> questions = new();
-            //using (HttpClient client = new HttpClient())
-            //{
-            //  HttpResponseMessage Response = client.GetAsync("https://localhost:44395/api/Question").Result;
-            //questions = Response.Content.ReadAsAsync<List<Question>>().Result;
-            //}
-
-            //if (questions == null)
-            //{
-            //    return View("Error");
-            //}
-            //return View(questions);
-            //return View();
         }
 
         public ActionResult QuestionForQuiz(int id)
