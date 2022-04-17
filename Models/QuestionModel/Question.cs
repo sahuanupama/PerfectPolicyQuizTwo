@@ -11,8 +11,8 @@ namespace PerfectPolicyQuizTwo.Models.QuestionModel
         public string questionToipc { get; set; }
         public string questionText { get; set; }
         public string questionImage { get; set; }
+        // public string questionAnswer { get; set; }
         public int quizId { get; set; }
         public string options { get; set; }
-
     }
 }

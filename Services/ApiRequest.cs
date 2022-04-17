@@ -14,9 +14,7 @@ namespace PerfectPolicyQuizTwo.Services
         // required to gain access to the context
         private readonly HttpContext _httpContext;
 
-
         public ApiRequest(IHttpContextAccessor httpContextAccessor)
-
         {
             // injecting a reference to the current context
             _httpContext = httpContextAccessor.HttpContext;
@@ -36,12 +34,11 @@ namespace PerfectPolicyQuizTwo.Services
                 _client.DefaultRequestHeaders.Authorization =
                     new AuthenticationHeaderValue("Bearer", _httpContext.Session.GetString("Token"));
             }
-
         }
+
         public List<T> GetAll(string controllerName)
         {
             HttpResponseMessage response = _client.GetAsync(controllerName).Result;
-
             var entityResult = response.Content.ReadAsAsync<List<T>>().Result;
 
             return entityResult;
@@ -50,7 +47,6 @@ namespace PerfectPolicyQuizTwo.Services
         public T GetSingle(string controllerName, int id)
         {
             HttpResponseMessage response = _client.GetAsync($"{controllerName}/{id}").Result;
-
             var entityResult = response.Content.ReadAsAsync<T>().Result;
 
             return entityResult;
@@ -59,7 +55,6 @@ namespace PerfectPolicyQuizTwo.Services
         public T Create(string controllerName, T entity)
         {
             HttpResponseMessage response = _client.PostAsJsonAsync(controllerName, entity).Result;
-
             var responseEntity = response.Content.ReadAsAsync<T>().Result;
 
             return responseEntity;
@@ -74,11 +69,9 @@ namespace PerfectPolicyQuizTwo.Services
         public T Edit(string controllerName, T entity, int id)
         {
             HttpResponseMessage response = _client.PutAsJsonAsync($"{controllerName}/{id}", entity).Result;
-
             var responseEntity = response.Content.ReadAsAsync<T>().Result;
 
             return responseEntity;
-
         }
 
         /// <summary>
@@ -91,12 +84,9 @@ namespace PerfectPolicyQuizTwo.Services
         public List<T> GetAllForParentId(string controllerName, string endpointName, int id)
         {
             var response = _client.GetAsync($"{controllerName}/{endpointName}/{id}").Result;
-
             var responseEntities = response.Content.ReadAsAsync<List<T>>().Result;
 
             return responseEntities;
         }
-
-
     }
 }

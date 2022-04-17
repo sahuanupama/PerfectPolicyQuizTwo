@@ -29,10 +29,8 @@ namespace PerfectPolicyQuizTwo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
             // create an in memory Database for storing session content
             services.AddDistributedMemoryCache();
-
             // Define the session parameters
             services.AddSession(opts =>
             {
@@ -40,14 +38,11 @@ namespace PerfectPolicyQuizTwo
                 opts.Cookie.HttpOnly = true;
                 opts.Cookie.IsEssential = true;
             });
-
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
             services.AddScoped<IApiRequest<Question>, ApiRequest<Question>>();
             //services.AddSingleton<IApiRequest<Teacher>, ApiTestRequest<Teacher>>();
             services.AddSingleton<IApiRequest<Quiz>, ApiRequest<Quiz>>();
             services.AddSingleton<IApiRequest<Option>, ApiRequest<Option>>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,17 +60,12 @@ namespace PerfectPolicyQuizTwo
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseSession();
-
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
+                endpoints.MapControllerRoute(name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }

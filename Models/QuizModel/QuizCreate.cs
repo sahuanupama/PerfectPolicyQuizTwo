@@ -15,6 +15,5 @@ namespace PerfectPolicyQuizTwo.Models.QuizModel
         public string quizpresonName { get; set; }
         public string quizPassNumber { get; set; }
         public string questionNumber { get; set; }
-
     }
 }

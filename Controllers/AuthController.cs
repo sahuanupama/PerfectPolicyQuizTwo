@@ -15,7 +15,6 @@ namespace PerfectPolicyQuizTwo.Controllers
         {
             return View();
         }
-        // recording commits
 
         [HttpPost]
         public IActionResult Login(UserInfo user)
@@ -25,17 +24,14 @@ namespace PerfectPolicyQuizTwo.Controllers
             using (HttpClient client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44395/api/");
-
                 var response = client.PostAsJsonAsync("Auth/GenerateToken", user).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
                     // logged in
                     token = response.Content.ReadAsStringAsync().Result;
-
                     // Store the token in the session
                     HttpContext.Session.SetString("Token", token);
-
                 }
                 else
                 {
@@ -45,7 +41,6 @@ namespace PerfectPolicyQuizTwo.Controllers
                     return View();
                 }
             }
-
             return RedirectToAction("Index", "Home");
         }
 
@@ -54,6 +49,5 @@ namespace PerfectPolicyQuizTwo.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
-
     }
 }

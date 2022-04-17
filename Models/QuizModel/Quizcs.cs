@@ -7,15 +7,12 @@ namespace PerfectPolicyQuizTwo.Models.QuizModel
 {
     public class Quiz
     {
-       
         public int quizId { get; set; }
         public string quizTitle { get; set; }
         public DateTime quizdate { get; set; }
         public string quizpresonName { get; set; }
         public string quizPassNumber { get; set; }
         public string questionNumber { get; set; }
-
         public ICollection<Quiz> quizzes { get; set; }
-       
     }
 }

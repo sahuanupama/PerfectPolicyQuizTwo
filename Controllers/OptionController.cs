@@ -21,7 +21,6 @@ namespace PerfectPolicyQuizTwo.Controllers
             _apiOptionRequest = apiOptionRequest;
         }
 
-
         // GET: OptionController
         public ActionResult Index()
         {

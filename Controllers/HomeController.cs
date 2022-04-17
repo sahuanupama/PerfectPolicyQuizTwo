@@ -42,6 +42,7 @@ namespace PerfectPolicyQuizTwo.Controllers
             {
                 return View("Error");
             }
+
             return View(quizzes);
         }
 
@@ -84,11 +85,5 @@ namespace PerfectPolicyQuizTwo.Controllers
             return View(options);
 
         }
-
-
-
-
-
-
     }
 }

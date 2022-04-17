@@ -16,9 +16,7 @@ namespace PerfectPolicyQuizTwo.Controllers
     public class QuestionController : Controller
     {
         private readonly IApiRequest<Question> _apiQuestionRequest;
-
         private readonly IApiRequest<Quiz> _apiQuizRequest;
-
         private readonly string questionController = "Question";
 
         public QuestionController(IApiRequest<Question> apiQuestionRequest, IApiRequest<Quiz> apiQuizRequest)
@@ -26,7 +24,6 @@ namespace PerfectPolicyQuizTwo.Controllers
             _apiQuestionRequest = apiQuestionRequest;
             _apiQuizRequest = apiQuizRequest;
         }
-
 
         // GET: QuestionController
         public ActionResult Index()
@@ -41,7 +38,6 @@ namespace PerfectPolicyQuizTwo.Controllers
             return View("Index", Question);
         }
 
-
         // GET: QuestionController/Details/5
         public ActionResult Details(int id)
         {
@@ -53,7 +49,6 @@ namespace PerfectPolicyQuizTwo.Controllers
         public ActionResult Create()
         {
             var question = _apiQuestionRequest.GetAll("Question");
-
             var QuestionDropDownListModel = question.Select(c => new SelectListItem
             {
                 Text = c.questionToipc,
@@ -61,9 +56,7 @@ namespace PerfectPolicyQuizTwo.Controllers
             }).ToList();
 
             ViewBag.QuestionDropDown = QuestionDropDownListModel;
-
             ViewData.Add("questionDDL", QuestionDropDownListModel);
-
             TempData.Add("questionDDL", QuestionDropDownListModel);
 
             return View();
@@ -77,7 +70,6 @@ namespace PerfectPolicyQuizTwo.Controllers
             try
             {
                 question.questionId = 0;
-
                 _apiQuestionRequest.Create("Question", question);
 
                 return RedirectToAction(nameof(Index));
