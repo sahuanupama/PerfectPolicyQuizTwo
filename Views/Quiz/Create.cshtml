@@ -12,11 +12,11 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="quizId" class="control-label"></label>
-                <input asp-for="quizId" class="form-control" />
-                <span asp-validation-for="quizId" class="text-danger"></span>
-            </div>
+            @* <div class="form-group">
+                    <label asp-for="quizId" class="control-label"></label>
+                    <input asp-for="quizId" class="form-control" />
+                    <span asp-validation-for="quizId" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="quizTitle" class="control-label"></label>
                 <input asp-for="quizTitle" class="form-control" />
@@ -37,11 +37,11 @@
                 <input asp-for="quizPassNumber" class="form-control" />
                 <span asp-validation-for="quizPassNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="questionNumber" class="control-label"></label>
-                <input asp-for="questionNumber" class="form-control" />
-                <span asp-validation-for="questionNumber" class="text-danger"></span>
-            </div>
+            @* <div class="form-group">
+                    <label asp-for="questionNumber" class="control-label"></label>
+                    <input asp-for="questionNumber" class="form-control" />
+                    <span asp-validation-for="questionNumber" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

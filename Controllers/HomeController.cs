@@ -83,7 +83,6 @@ namespace PerfectPolicyQuizTwo.Controllers
             }
 
             return View(options);
-
         }
     }
 }

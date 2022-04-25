@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.Options;
+using PerfectPolicyQuizTwo.Helper;
 using PerfectPolicyQuizTwo.Models;
 using PerfectPolicyQuizTwo.Models.QuestionModel;
 using PerfectPolicyQuizTwo.Services;
@@ -35,6 +37,13 @@ namespace PerfectPolicyQuizTwo.Controllers
             return View(option);
         }
 
+        //Get: OptionController/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+
         // POST: QuizController/Create
         [HttpPost]
         public ActionResult Create(Option option)
@@ -43,10 +52,89 @@ namespace PerfectPolicyQuizTwo.Controllers
             {
                 Option newOption = new Option()
                 {
-                    OptionId = option.OptionId,
                     OptionText = option.OptionText,
-                    OptionNumber = option.OptionNumber
+                    OptionNumber = option.OptionNumber,
+                    QuestionId = option.QuestionId
                 };
+                _apiOptionRequest.Create("option", newOption);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+        //Get: OptionController/Edit/5
+        public ActionResult Edit(int id)
+        {
+
+            try
+            {
+                if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+                {
+                    return RedirectToAction("Login", "Auth");
+                }
+                Option option = _apiOptionRequest.GetSingle("option", id);
+
+                return View(option);
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //Post: OptionController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int id, Option option)
+        {
+            try
+            {
+                if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+                {
+                    return RedirectToAction("Login", "Auth");
+                }
+
+                _apiOptionRequest.Edit("option", option, id);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+
+        // GET: QuestionController/Delete/5
+        public ActionResult Delete(int id)
+        {
+            if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            Option option = _apiOptionRequest.GetSingle("option", id);
+
+            return View(option);
+        }
+
+        // POST: QuestionController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            try
+            {
+                if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                _apiOptionRequest.Delete("option", id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch

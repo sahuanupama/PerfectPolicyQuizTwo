@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<PerfectPolicyQuizTwo.Models.QuizModel.Quiz>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quizzes";
 }
 
-<h1>Index</h1>
+<h1>Quizzes</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -62,7 +62,7 @@
                     @Html.DisplayFor(modelItem => item.questionNumber)
                 </td>
                 <td>
-                    @Html.ActionLink("Question", "QuestionForQuiz", "Question", new { id = item.quizId }, new { @Question = "btn btn-primary" })
+                    @Html.ActionLink("Questions", "QuestionsForQuiz", "Question", new { id = item.quizId }, new { @Question = "btn btn-primary" })
                 <td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.quizId }) |

@@ -70,13 +70,13 @@ namespace PerfectPolicyQuizTwo.Controllers
             {
                 Quiz createdQuiz = new Quiz()
                 {
-                    quizId = quiz.quizId,
                     quizTitle = quiz.quizTitle,
                     quizdate = quiz.quizdate,
                     quizpresonName = quiz.quizpresonName,
-                    quizPassNumber = quiz.quizPassNumber,
-                    questionNumber = quiz.questionNumber
+                    quizPassNumber = quiz.quizPassNumber
                 };
+
+                _apiQuizRequest.Create(quizController, createdQuiz);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -148,7 +148,10 @@ namespace PerfectPolicyQuizTwo.Controllers
             try
             {
                 if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+                {
                     return RedirectToAction(nameof(Index));
+                }
+
 
                 _apiQuizRequest.Delete(quizController, id);
 
@@ -164,7 +167,7 @@ namespace PerfectPolicyQuizTwo.Controllers
         public IActionResult FilterQuiz(IFormCollection collection)
         {
             // Retrieve filter text
-            string filterText = collection["emailProvider"];
+            string filterText = collection["QuizCreator"];
             // retrieve a list of all teachers
             var quizList = _apiQuizRequest.GetAll(quizController);
             // filter that list, return the results to a new list

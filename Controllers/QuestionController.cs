@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using PerfectPolicyQuizTwo.Helper;
 using PerfectPolicyQuizTwo.Models;
 using PerfectPolicyQuizTwo.Models.QuestionModel;
 using PerfectPolicyQuizTwo.Models.QuizModel;
@@ -48,17 +49,6 @@ namespace PerfectPolicyQuizTwo.Controllers
         // GET: QuestionController/Create
         public ActionResult Create()
         {
-            var question = _apiQuestionRequest.GetAll("Question");
-            var QuestionDropDownListModel = question.Select(c => new SelectListItem
-            {
-                Text = c.questionToipc,
-                Value = c.questionId.ToString()
-            }).ToList();
-
-            ViewBag.QuestionDropDown = QuestionDropDownListModel;
-            ViewData.Add("questionDDL", QuestionDropDownListModel);
-            TempData.Add("questionDDL", QuestionDropDownListModel);
-
             return View();
         }
 
@@ -69,8 +59,14 @@ namespace PerfectPolicyQuizTwo.Controllers
         {
             try
             {
-                question.questionId = 0;
-                _apiQuestionRequest.Create("Question", question);
+                Question newQuestion = new Question()
+                {
+                    questionToipc = question.questionToipc,
+                    questionText = question.questionText,
+                    questionImage = question.questionImage,
+                    quizId = question.quizId
+                };
+                _apiQuestionRequest.Create("Question", newQuestion);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -83,16 +79,35 @@ namespace PerfectPolicyQuizTwo.Controllers
         // GET: QuestionController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            try
+            {
+                if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+                {
+                    return RedirectToAction("Login", "Auth");
+                }
+                Question question = _apiQuestionRequest.GetSingle(questionController, id);
+                return View(question);
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // POST: QuestionController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Question question)
         {
             try
             {
+                if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+                {
+                    return RedirectToAction("Login", "Auth");
+                }
+
+                _apiQuestionRequest.Edit(questionController, question, id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -104,7 +119,13 @@ namespace PerfectPolicyQuizTwo.Controllers
         // GET: QuestionController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            Question question = _apiQuestionRequest.GetSingle(questionController, id);
+            return View(question);
         }
 
         // POST: QuestionController/Delete/5
@@ -114,12 +135,25 @@ namespace PerfectPolicyQuizTwo.Controllers
         {
             try
             {
+                if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+
+                _apiQuestionRequest.Delete(questionController, id);
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
                 return View();
             }
+        }
+
+        public ActionResult QuestionsForQuiz(int id)
+        {
+            List<Question> quizQuestions = _apiQuestionRequest.GetAllForParentId("Question", "QuestionsForQuizId", id);
+            return View("Index", quizQuestions);
         }
     }
 }

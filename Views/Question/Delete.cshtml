@@ -1,0 +1,56 @@
+﻿@model PerfectPolicyQuizTwo.Models.QuestionModel.Question
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Question</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.questionId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.questionId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.questionToipc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.questionToipc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.questionText)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.questionText)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.questionImage)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.questionImage)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.quizId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.quizId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.options)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.options)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
