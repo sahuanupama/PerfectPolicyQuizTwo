@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PerfectPolicyQuizTwo.Models;
+using System.Net.Http.Headers;
 
 namespace PerfectPolicyQuizTwo
 {
@@ -30,6 +31,15 @@ namespace PerfectPolicyQuizTwo
         {
             services.AddControllersWithViews();
             // create an in memory Database for storing session content
+
+            services.AddHttpClient("Aplication", c =>
+            {
+                c.BaseAddress = new Uri("Configuration[ApiUrl]");
+                c.DefaultRequestHeaders.Clear();
+                c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            });
+
+
             services.AddDistributedMemoryCache();
             // Define the session parameters
             services.AddSession(opts =>

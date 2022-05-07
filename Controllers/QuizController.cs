@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PerfectPolicyQuizTwo.Helper;
@@ -8,9 +9,11 @@ using PerfectPolicyQuizTwo.Models.QuizModel;
 using PerfectPolicyQuizTwo.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+
 
 namespace PerfectPolicyQuizTwo.Controllers
 {
@@ -20,10 +23,14 @@ namespace PerfectPolicyQuizTwo.Controllers
         private readonly IApiRequest<Question> _apiQuestionRequest;
         private readonly string quizController = "Quiz";
 
-        public QuizController(IApiRequest<Quiz> apiQuizRequest, IApiRequest<Question> apiQuestionRequest)
+        private IWebHostEnvironment _environment;
+
+        public QuizController(IApiRequest<Quiz> apiQuizRequest, IApiRequest<Question> apiQuestionRequest, IWebHostEnvironment environment)
+
         {
             _apiQuizRequest = apiQuizRequest;
             _apiQuestionRequest = apiQuestionRequest;
+            _environment = environment;
         }
 
         [HttpPost]
@@ -175,5 +182,33 @@ namespace PerfectPolicyQuizTwo.Controllers
             // return this list to the index page
             return View("Index", filteredList);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadFile(IFormFile file)
+        {
+            try
+            {
+                // retrive a folder path
+                string folderRoot = Path.Combine(_environment.ContentRootPath, "wwwroot\\Uploads");
+                //combine filename and folder path
+                string filePath = Path.Combine(folderRoot, file.FileName);
+                //save the file
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                return Ok(new { success = true, message = "File Uploaded" });
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(new { success = false, message = e.Message });
+            }
+
+
+        }
+
+
+
     }
 }
