@@ -32,9 +32,9 @@ namespace PerfectPolicyQuizTwo
             services.AddControllersWithViews();
             // create an in memory Database for storing session content
 
-            services.AddHttpClient("Aplication", c =>
+            services.AddHttpClient("ApiClient", c =>
             {
-                c.BaseAddress = new Uri("Configuration[ApiUrl]");
+                c.BaseAddress = new Uri(Configuration["ApiUrl"]);
                 c.DefaultRequestHeaders.Clear();
                 c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
