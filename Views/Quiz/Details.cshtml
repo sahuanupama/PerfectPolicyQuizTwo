@@ -1,8 +1,6 @@
 ﻿@model PerfectPolicyQuizTwo.Models.QuizModel.Quiz
 
-@{
-    ViewData["Title"] = "Details";
-}
+@{ ViewData["Title"] = "Details"; }
 
 <h1>Details</h1>
 
@@ -29,10 +27,10 @@
             @Html.DisplayFor(model => model.quizdate)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.quizpresonName)
+            @Html.DisplayNameFor(model => model.quizpersonName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.quizpresonName)
+            @Html.DisplayFor(model => model.quizpersonName)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.quizPassNumber)
@@ -43,7 +41,7 @@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.questionNumber)
         </dt>
-        <img src="/Uploads/@Html.DisplayFor(model => model.quizPassNumber)" alt="image" width="400px" height="auto" />
+        < img src="/Uploads/@Html.DisplayFor(model => model.quizPassNumber)" alt="image" width="400px" height="auto" />
 
         @*<dd class="col-sm-10">
                 @Html.DisplayFor(model => model.questionNumber)

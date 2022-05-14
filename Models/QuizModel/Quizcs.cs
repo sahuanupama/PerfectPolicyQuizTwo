@@ -10,8 +10,8 @@ namespace PerfectPolicyQuizTwo.Models.QuizModel
         public int quizId { get; set; }
         public string quizTitle { get; set; }
         public DateTime quizdate { get; set; }
-        public string quizpresonName { get; set; }
-        public string quizPassNumber { get; set; }
+        public string quizpersonName { get; set; }
+        public int quizPassNumber { get; set; }
         public string questionNumber { get; set; }
 
         public ICollection<Quiz> quizzes { get; set; }

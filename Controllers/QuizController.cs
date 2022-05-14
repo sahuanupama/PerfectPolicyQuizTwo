@@ -79,7 +79,7 @@ namespace PerfectPolicyQuizTwo.Controllers
                 {
                     quizTitle = quiz.quizTitle,
                     quizdate = quiz.quizdate,
-                    quizpresonName = quiz.quizpresonName,
+                    quizpersonName = quiz.quizpersonName,
                     quizPassNumber = quiz.quizPassNumber
                 };
 

@@ -13,6 +13,7 @@ namespace PerfectPolicyQuizTwo.Models.QuestionModel
         public string questionImage { get; set; }
         // public string questionAnswer { get; set; }
         public int quizId { get; set; }
-        public string options { get; set; }
+
+        //public string options { get; set; }
     }
 }

@@ -1,8 +1,6 @@
 ﻿@model PerfectPolicyQuizTwo.Models.QuizModel.Quiz
 
-@{
-    ViewData["Title"] = "Create";
-}
+@{ ViewData["Title"] = "Create"; }
 
 <h1>Create</h1>
 
@@ -28,11 +26,11 @@
                 <span asp-validation-for="quizdate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="quizpresonName" class="control-label"></label>
+                <label asp-for="quizpersonName" class="control-label"></label>
 
-                <input asp-for="quizpresonName" class="form-control" />
+                <input asp-for="quizpersonName" class="form-control" />
 
-                <span asp-validation-for="quizpresonName" class="text-danger"></span>
+                <span asp-validation-for="quizpersonName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="quizPassNumber" class="control-label"></label>
@@ -55,10 +53,9 @@
 
     @using (Html.BeginForm("UploadFile", "Quiz", FormMethod.Post, new { @class = "dropzone", @id = "dropzone-form" }))
     {
-        <div class="fallback">
-            <input name="file" type="file" />
-        </div>
-    }
+<div class="fallback">
+    <input name="file" type="file" />
+</div>}
 </div>
 <div>
     <a asp-action="Index">Back to List</a>
