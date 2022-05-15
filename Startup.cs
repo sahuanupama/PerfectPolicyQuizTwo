@@ -39,7 +39,6 @@ namespace PerfectPolicyQuizTwo
                 c.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             });
 
-
             services.AddDistributedMemoryCache();
             // Define the session parameters
             services.AddSession(opts =>
@@ -50,7 +49,6 @@ namespace PerfectPolicyQuizTwo
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IApiRequest<Question>, ApiRequest<Question>>();
-            //services.AddSingleton<IApiRequest<Teacher>, ApiTestRequest<Teacher>>();
             services.AddSingleton<IApiRequest<Quiz>, ApiRequest<Quiz>>();
             services.AddSingleton<IApiRequest<Option>, ApiRequest<Option>>();
         }

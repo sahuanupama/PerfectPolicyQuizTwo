@@ -12,6 +12,5 @@ namespace PerfectPolicyQuizTwo.Models
         public string OptionText { get; set; }
         public string OptionNumber { get; set; }
         public int QuestionId { get; set; }
-        public Question Question { get; set; }
     }
 }
