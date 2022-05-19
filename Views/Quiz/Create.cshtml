@@ -1,8 +1,4 @@
-﻿@model PerfectPolicyQuizTwo.Models.QuizModel.Quiz
-
-@{ ViewData["Title"] = "Create"; }
-
-<h1>Create</h1>
+﻿@model PerfectPolicyQuizTwo.Models.Quiz
 
 <h4>Quiz</h4>
 <hr />
@@ -10,38 +6,31 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @* <div class="form-group">
-                    <label asp-for="quizId" class="control-label"></label>
-                    <input asp-for="quizId" class="form-control" />
-                    <span asp-validation-for="quizId" class="text-danger"></span>
-                </div>*@
             <div class="form-group">
-                <label asp-for="quizTitle" class="control-label"></label>
-                <input asp-for="quizTitle" class="form-control" />
-                <span asp-validation-for="quizTitle" class="text-danger"></span>
+                <label asp-for="QuizId" class="control-label"></label>
+                <input asp-for="QuizId" class="form-control" />
+                <span asp-validation-for="QuizId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="quizdate" class="control-label"></label>
-                <input asp-for="quizdate" class="form-control" />
-                <span asp-validation-for="quizdate" class="text-danger"></span>
+                <label asp-for="QuizTitle" class="control-label"></label>
+                <input asp-for="QuizTitle" class="form-control" />
+                <span asp-validation-for="QuizTitle" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="quizpersonName" class="control-label"></label>
-
-                <input asp-for="quizpersonName" class="form-control" />
-
-                <span asp-validation-for="quizpersonName" class="text-danger"></span>
+                <label asp-for="QuizDate" class="control-label"></label>
+                <input asp-for="QuizDate" class="form-control" />
+                <span asp-validation-for="QuizDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="quizPassNumber" class="control-label"></label>
-                <input asp-for="quizPassNumber" class="form-control" />
-                <span asp-validation-for="quizPassNumber" class="text-danger"></span>
+                <label asp-for="QuizPersonName" class="control-label"></label>
+                <input asp-for="QuizPersonName" class="form-control" />
+                <span asp-validation-for="QuizPersonName" class="text-danger"></span>
             </div>
-            @* <div class="form-group">
-                    <label asp-for="questionNumber" class="control-label"></label>
-                    <input asp-for="questionNumber" class="form-control" />
-                    <span asp-validation-for="questionNumber" class="text-danger"></span>
-                </div>*@
+            <div class="form-group">
+                <label asp-for="QuizPassNumber" class="control-label"></label>
+                <input asp-for="QuizPassNumber" class="form-control" />
+                <span asp-validation-for="QuizPassNumber" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -49,34 +38,10 @@
     </div>
 </div>
 
-<div class="row">
-
-    @using (Html.BeginForm("UploadFile", "Quiz", FormMethod.Post, new { @class = "dropzone", @id = "dropzone-form" }))
-    {
-<div class="fallback">
-    <input name="file" type="file" />
-</div>}
-</div>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
-<script src="/lib/dropzone/min/dropzone.min.js"></script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<script type="text/javascript">
-    Dropzone.options.dropzoneForm = {
-        maxFiles: 1,
-        acceptedFiles: "image/*",
-        success: function (file, response) {
-            $("#quizPassNumber").val(file.upload.filename)
-            console("Filename: " + file.upload.filename);
-            file.previewElement.quizList.add("dz-success");
-
-        },
-        error: function (file, message) {
-            alert(message);
-        }
-    }
-</script>

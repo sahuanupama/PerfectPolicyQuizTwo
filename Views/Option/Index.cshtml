@@ -1,15 +1,14 @@
 ﻿@model IEnumerable<PerfectPolicyQuizTwo.Models.Option>
 
 @{
-    ViewData["Title"] = "Options";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Options</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-
 <table class="table">
     <thead>
         <tr>
@@ -29,27 +28,26 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OptionId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OptionText)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OptionNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QuestionId)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.OptionId }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.OptionId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.OptionId })
-                </td>
-            </tr>
-        }
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OptionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OptionText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OptionNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuestionId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
     </tbody>
 </table>

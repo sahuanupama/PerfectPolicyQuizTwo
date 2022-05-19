@@ -1,71 +1,59 @@
-﻿@model IEnumerable<PerfectPolicyQuizTwo.Models.QuizModel.Quiz>
+﻿@model IEnumerable<PerfectPolicyQuizTwo.Models.Quiz>
 
-@{ ViewData["Title"] = "Quizzes"; }
+@{
+    ViewData["Title"] = "Index";
+}
 
-<h1>Quizzes</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-
-@using (Html.BeginForm("Filter", "Quiz", FormMethod.Post))
-{
-<select asp-items="@ViewBag.QuizDDL" name="QuizDDL"></select>
-                <inputtype ="submit" value="submit" />}
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.quizId)
+                @Html.DisplayNameFor(model => model.QuizId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.quizTitle)
+                @Html.DisplayNameFor(model => model.QuizTitle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.quizdate)
+                @Html.DisplayNameFor(model => model.QuizDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.quizpersonName)
+                @Html.DisplayNameFor(model => model.QuizPersonName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.quizPassNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.questionNumber)
+                @Html.DisplayNameFor(model => model.QuizPassNumber)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.quizId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.quizTitle)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.quizdate)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.quizpersonName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.quizPassNumber)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.questionNumber)
-    </td>
-    <td>
-        @Html.ActionLink("Questions", "QuestionsForQuiz", "Question", new { id = item.quizId }, new { @Question = "btn btn-primary" })
-    <td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.quizId }) |
-        @Html.ActionLink("Details", "Details", new { id = item.quizId }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.quizId })
-    </td>
-</tr>}
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizPersonName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuizPassNumber)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
     </tbody>
 </table>

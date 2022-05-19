@@ -1,6 +1,8 @@
-﻿@model PerfectPolicyQuizTwo.Models.QuizModel.Quiz
+﻿@model PerfectPolicyQuizTwo.Models.Quiz
 
-@{ ViewData["Title"] = "Delete"; }
+@{
+    ViewData["Title"] = "Delete";
+}
 
 <h1>Delete</h1>
 
@@ -9,44 +11,38 @@
     <h4>Quiz</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.quizId)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QuizId)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.quizId)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QuizId)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.quizTitle)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QuizTitle)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.quizTitle)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QuizTitle)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.quizdate)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QuizDate)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.quizdate)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QuizDate)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.quizpersonName)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QuizPersonName)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.quizpersonName)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QuizPersonName)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.quizPassNumber)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QuizPassNumber)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.quizPassNumber)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.questionNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.questionNumber)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QuizPassNumber)
         </dd>
     </dl>
-
+    
     <form asp-action="Delete">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>

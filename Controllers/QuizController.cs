@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PerfectPolicyQuizTwo.Helper;
 using PerfectPolicyQuizTwo.Models;
-using PerfectPolicyQuizTwo.Models.QuestionModel;
-using PerfectPolicyQuizTwo.Models.QuizModel;
 using PerfectPolicyQuizTwo.Services;
 using System;
 using System.Collections.Generic;
@@ -46,8 +44,8 @@ namespace PerfectPolicyQuizTwo.Controllers
             var quizList = _apiQuizRequest.GetAll("Quiz");
             var quizDDL = quizList.Select(c => new SelectListItem
             {
-                Value = c.quizTitle,
-                Text = c.quizTitle,
+                Value = c.QuizTitle,
+                Text = c.QuizTitle,
             });
 
             ViewBag.QuizDDL = quizDDL;
@@ -77,10 +75,10 @@ namespace PerfectPolicyQuizTwo.Controllers
             {
                 Quiz createdQuiz = new Quiz()
                 {
-                    quizTitle = quiz.quizTitle,
-                    quizdate = quiz.quizdate,
-                    quizpersonName = quiz.quizpersonName,
-                    quizPassNumber = quiz.quizPassNumber
+                    QuizTitle = quiz.QuizTitle,
+                    QuizDate = quiz.QuizDate,
+                    QuizPersonName = quiz.QuizPersonName,
+                    QuizPassNumber = quiz.QuizPassNumber
                 };
 
                 _apiQuizRequest.Create(quizController, createdQuiz);
@@ -178,7 +176,7 @@ namespace PerfectPolicyQuizTwo.Controllers
             // retrieve a list of all teachers
             var quizList = _apiQuizRequest.GetAll(quizController);
             // filter that list, return the results to a new list
-            var filteredList = quizList.Where(c => c.quizTitle.ToLower().Contains(filterText.ToLower())).ToList();
+            var filteredList = quizList.Where(c => c.QuizTitle.ToLower().Contains(filterText.ToLower())).ToList();
             // return this list to the index page
             return View("Index", filteredList);
         }

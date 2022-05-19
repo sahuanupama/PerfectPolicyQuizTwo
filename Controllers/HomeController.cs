@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PerfectPolicyQuizTwo.Models;
-using PerfectPolicyQuizTwo.Models.QuestionModel;
-using PerfectPolicyQuizTwo.Models.QuizModel;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
@@ -54,7 +52,7 @@ namespace PerfectPolicyQuizTwo.Controllers
 
         public IActionResult Question()
         {
-            List<Models.QuestionModel.Question> questions = new();
+            List<Question> questions = new();
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage Response = client.GetAsync("https://localhost:44395/api/Question").Result;

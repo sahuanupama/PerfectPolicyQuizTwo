@@ -1,5 +1,4 @@
-using PerfectPolicyQuizTwo.Models.QuestionModel;
-using PerfectPolicyQuizTwo.Models.QuizModel;
+using PerfectPolicyQuizTwo.Models;
 using PerfectPolicyQuizTwo.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PerfectPolicyQuizTwo.Models;
 using System.Net.Http.Headers;
 
 namespace PerfectPolicyQuizTwo

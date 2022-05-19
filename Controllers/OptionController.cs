@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.Options;
 using PerfectPolicyQuizTwo.Helper;
 using PerfectPolicyQuizTwo.Models;
-using PerfectPolicyQuizTwo.Models.QuestionModel;
 using PerfectPolicyQuizTwo.Services;
 using System;
 using System.Collections.Generic;

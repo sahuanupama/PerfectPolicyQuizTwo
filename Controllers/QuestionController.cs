@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PerfectPolicyQuizTwo.Helper;
 using PerfectPolicyQuizTwo.Models;
-using PerfectPolicyQuizTwo.Models.QuestionModel;
-using PerfectPolicyQuizTwo.Models.QuizModel;
 using PerfectPolicyQuizTwo.Services;
 using System;
 using System.Collections.Generic;
@@ -61,10 +59,10 @@ namespace PerfectPolicyQuizTwo.Controllers
             {
                 Question newQuestion = new Question()
                 {
-                    questionToipc = question.questionToipc,
-                    questionText = question.questionText,
-                    questionImage = question.questionImage,
-                    quizId = question.quizId
+                    QuestionTopic = question.QuestionTopic,
+                    QuestionText = question.QuestionText,
+                    QuestionImage = question.QuestionImage,
+                    QuizId = question.QuizId
                 };
                 _apiQuestionRequest.Create("Question", newQuestion);
 

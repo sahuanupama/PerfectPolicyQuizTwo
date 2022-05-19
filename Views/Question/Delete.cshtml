@@ -1,6 +1,8 @@
-﻿@model PerfectPolicyQuizTwo.Models.QuestionModel.Question
+﻿@model PerfectPolicyQuizTwo.Models.Question
 
-@{ ViewData["Title"] = "Delete"; }
+@{
+    ViewData["Title"] = "Delete";
+}
 
 <h1>Delete</h1>
 
@@ -9,45 +11,38 @@
     <h4>Question</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.questionId)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QuestionId)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.questionId)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QuestionId)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.questionToipc)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QuestionTopic)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.questionToipc)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QuestionTopic)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.questionText)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QuestionText)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.questionText)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QuestionText)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.questionImage)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QuestionImage)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.questionImage)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QuestionImage)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.quizId)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QuizId)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.quizId)
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QuizId)
         </dd>
-
-        @*<dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.options)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.options)
-            </dd>*@
     </dl>
-
+    
     <form asp-action="Delete">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
