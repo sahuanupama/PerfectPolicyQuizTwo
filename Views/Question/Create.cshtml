@@ -1,13 +1,11 @@
 ﻿@model PerfectPolicyQuizTwo.Models.Question
 
-@{
-    ViewData["Title"] = "Create";
+@{ ViewData["Title"] = "Create";
 
     var quizDropList = ViewBag.QuizDropDown;
     var quizDropList2 = (List<SelectListItem>)ViewData["quizDDL"];
     var quizDropList3 = ViewData["quizDDL"] as List<SelectListItem>;
-    var quizDropList4 = TempData["quizDDL"] as List<SelectListItem>;
-}
+    var quizDropList4 = TempData["quizDDL"] as List<SelectListItem>; }
 
 <h1>Create</h1>
 
@@ -17,11 +15,11 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-           @* <div class="form-group">
-                <label asp-for="QuestionId" class="control-label"></label>
-                <input asp-for="QuestionId" class="form-control" />
-                <span asp-validation-for="QuestionId" class="text-danger"></span>
-            </div>*@
+            @* <div class="form-group">
+                    <label asp-for="QuestionId" class="control-label"></label>
+                    <input asp-for="QuestionId" class="form-control" />
+                    <span asp-validation-for="QuestionId" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="QuestionTopic" class="control-label"></label>
                 <input asp-for="QuestionTopic" class="form-control" />
@@ -39,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="QuizId" class="control-label"></label>
-                <input asp-for="QuizId" asp-items="@quizDropList"  class="form-control" />
+                <input asp-for="QuizId" asp-items="@quizDropList" class="form-control" />
                 <span asp-validation-for="QuizId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -51,12 +49,11 @@
 
 
 <div class=" row">
-    @using (Html.BeginForm("UploadFile", "question", FormMethod.Post, new { @class = "dropzone", @id = "dropzone-form" }))
+    @using (Html.BeginForm("UploadFile", "Question", FormMethod.Post, new { @class = "dropzone", @id = "dropzone-form" }))
     {
-        <div class="fallback">
-            <input name="file" type="file" />
-        </div>
-    }
+<div class="fallback">
+    <input name="file" type="file" />
+</div>}
 </div>
 
 
@@ -74,7 +71,8 @@
         maxFiles: 1,
         acceptedFiles: "image/*",
         success: function (file, response) {
-            $("#QuestionImage").val(file.upload.filName);
+            $('#QuestionImage').val(file.upload.filName);
+            //  console("Filename: " + file.upload.filename);
             file.previewElement.questionList.add("dz-success");
         },
         error: function (file, message) {
