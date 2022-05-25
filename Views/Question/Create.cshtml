@@ -61,19 +61,18 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+<script src="~/lib/dropzone/min/dropzone.min.js"></script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
-<script src="/lib/dropzone/min/dropzone.min.js"></script>
 <script type="text/javascript">
     Dropzone.options.dropzoneForm = {
         maxFiles: 1,
         acceptedFiles: "image/*",
         success: function (file, response) {
-            $('#QuestionImage').val(file.upload.filName);
-            //  console("Filename: " + file.upload.filename);
-            file.previewElement.questionList.add("dz-success");
+            $('#QuestionImage').val(file.upload.filename);
+            file.previewElement.classList.add("dz-success");
         },
         error: function (file, message) {
             alert(message);
