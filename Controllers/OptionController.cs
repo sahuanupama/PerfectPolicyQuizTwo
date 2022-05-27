@@ -15,11 +15,14 @@ namespace PerfectPolicyQuizTwo.Controllers
 {
     public class OptionController : Controller
     {
+        private readonly IApiRequest<Question> _apiQuestionRequest;
         private readonly IApiRequest<Option> _apiOptionRequest;
+        private readonly string optionController = "option";
 
-        public OptionController(IApiRequest<Option> apiOptionRequest)
+        public OptionController(IApiRequest<Option> apiOptionRequest, IApiRequest<Question> apiQuestionRequest)
         {
             _apiOptionRequest = apiOptionRequest;
+            _apiQuestionRequest = apiQuestionRequest;
         }
 
         // GET: OptionController
@@ -39,9 +42,16 @@ namespace PerfectPolicyQuizTwo.Controllers
         //Get: OptionController/Create
         public ActionResult Create()
         {
+            var question = _apiQuestionRequest.GetAll("Question");
+            var questionDropDownListModel = question.Select(c => new SelectListItem
+            {
+                Text = c.QuestionText,
+                Value = c.QuestionId.ToString()
+            }).ToList();
+
+            ViewData.Add("questionDDL", questionDropDownListModel);
             return View();
         }
-
 
         // POST: QuizController/Create
         [HttpPost]
@@ -64,11 +74,9 @@ namespace PerfectPolicyQuizTwo.Controllers
             }
         }
 
-
         //Get: OptionController/Edit/5
         public ActionResult Edit(int id)
         {
-
             try
             {
                 if (!AuthenticationHelper.isAuthenticated(this.HttpContext))
@@ -106,7 +114,6 @@ namespace PerfectPolicyQuizTwo.Controllers
                 return View();
             }
         }
-
 
         // GET: QuestionController/Delete/5
         public ActionResult Delete(int id)

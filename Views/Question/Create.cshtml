@@ -1,25 +1,15 @@
 ﻿@model PerfectPolicyQuizTwo.Models.Question
 
 @{ ViewData["Title"] = "Create";
-
-    var quizDropList = ViewBag.QuizDropDown;
-    var quizDropList2 = (List<SelectListItem>)ViewData["quizDDL"];
-    var quizDropList3 = ViewData["quizDDL"] as List<SelectListItem>;
-    var quizDropList4 = TempData["quizDDL"] as List<SelectListItem>; }
+    var quizDropList2 = (List<SelectListItem>)ViewData["quizDDL"]; }
 
 <h1>Create</h1>
-
 <h4>Question</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @* <div class="form-group">
-                    <label asp-for="QuestionId" class="control-label"></label>
-                    <input asp-for="QuestionId" class="form-control" />
-                    <span asp-validation-for="QuestionId" class="text-danger"></span>
-                </div>*@
             <div class="form-group">
                 <label asp-for="QuestionTopic" class="control-label"></label>
                 <input asp-for="QuestionTopic" class="form-control" />
@@ -37,7 +27,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="QuizId" class="control-label"></label>
-                <input asp-for="QuizId" asp-items="@quizDropList" class="form-control" />
+                <select asp-for="QuizId" asp-items="@quizDropList2" class="from-control"></select>
                 <span asp-validation-for="QuizId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -47,7 +37,6 @@
     </div>
 </div>
 
-
 <div class=" row">
     @using (Html.BeginForm("UploadFile", "Question", FormMethod.Post, new { @class = "dropzone", @id = "dropzone-form" }))
     {
@@ -55,7 +44,6 @@
     <input name="file" type="file" />
 </div>}
 </div>
-
 
 <div>
     <a asp-action="Index">Back to List</a>

@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using PerfectPolicyQuizTwo.Helper;
 using PerfectPolicyQuizTwo.Models;
 using PerfectPolicyQuizTwo.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PerfectPolicyQuizTwo.Controllers
@@ -15,8 +17,8 @@ namespace PerfectPolicyQuizTwo.Controllers
     {
         private readonly IApiRequest<Question> _apiQuestionRequest;
         private readonly IApiRequest<Quiz> _apiQuizRequest;
-        private readonly string questionController = "Question";
         private IWebHostEnvironment _environment;
+        private readonly string questionController = "Question";
 
         public QuestionController(IApiRequest<Question> apiQuestionRequest, IApiRequest<Quiz> apiQuizRequest, IWebHostEnvironment environment)
         {
@@ -48,6 +50,15 @@ namespace PerfectPolicyQuizTwo.Controllers
         // GET: QuestionController/Create
         public ActionResult Create()
         {
+            // Get a List of Quizs from the Api
+            var quizes = _apiQuizRequest.GetAll("Quiz");
+            var quizDropDownListModel = quizes.Select(c => new SelectListItem
+            {
+                Text = c.QuizTitle,
+                Value = c.QuizId.ToString()
+            }).ToList();
+
+            ViewData.Add("quizDDL", quizDropDownListModel);
             return View();
         }
 
@@ -104,7 +115,6 @@ namespace PerfectPolicyQuizTwo.Controllers
                 {
                     return RedirectToAction("Login", "Auth");
                 }
-
                 _apiQuestionRequest.Edit(questionController, question, id);
 
                 return RedirectToAction(nameof(Index));
@@ -138,7 +148,6 @@ namespace PerfectPolicyQuizTwo.Controllers
                 {
                     return RedirectToAction(nameof(Index));
                 }
-
                 _apiQuestionRequest.Delete(questionController, id);
 
                 return RedirectToAction(nameof(Index));
@@ -173,7 +182,6 @@ namespace PerfectPolicyQuizTwo.Controllers
             }
             catch (Exception e)
             {
-
                 return BadRequest(new { success = false, message = e.Message });
             }
         }

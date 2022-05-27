@@ -7,7 +7,7 @@ namespace PerfectPolicyQuizTwo.Models.ViewModel
 {
     public class QuizCount
     {
-        public string QuizName { get; set; }
+        public string QuizPersonName { get; set; }
         public int QuestionCount { get; set; }
     }
 }

@@ -25,13 +25,10 @@ namespace PerfectPolicyQuizTwo.Controllers
         public IActionResult QuizCount()
         {
             var response = _client.GetAsync("Report/QuizCountReport").Result;
-
             List<QuizCount> quizCounts = response.Content.ReadAsAsync<List<QuizCount>>().Result;
-            // TempData["ReportData"] = QuizCount();
 
             var jsonData = JsonSerializer.Serialize(quizCounts);
             HttpContext.Session.SetString("ReportData", jsonData);
-
 
             // it define the chart object itself
             Chart chart = new Chart();
@@ -39,7 +36,7 @@ namespace PerfectPolicyQuizTwo.Controllers
             chart.Type = Enums.ChartType.Bar;
 
             ChartJSCore.Models.Data data = new ChartJSCore.Models.Data();
-            data.Labels = quizCounts.Select(c => c.QuizName).ToList();
+            data.Labels = quizCounts.Select(c => c.QuizPersonName).ToList();
 
             BarDataset barData = new BarDataset()
             {
@@ -58,33 +55,28 @@ namespace PerfectPolicyQuizTwo.Controllers
 
         public IActionResult ExportData()
         {
+            // serialise the report data and save in the session.
             var jsonData = HttpContext.Session.GetString("ReportData");
             var reportData = JsonSerializer.Deserialize<List<QuizCount>>(jsonData);
 
-
-
-            // Get data we need export
-            var QuizReport = (List<QuizCount>)TempData.Peek("ReportData");
-
-            //Create an empty memory stream
+            // Create an empty memory stream
             var stream = new MemoryStream();
 
-            //Generate  the csv data
+            // generate the CSV data
             using (var writeFile = new StreamWriter(stream, leaveOpen: true))
             {
-                // Configuration of the csv writer
+                // Configuration of the CSV Writer
                 var csv = new CsvWriter(writeFile, CultureInfo.CurrentCulture, leaveOpen: true);
 
-                // write the csv data to the memory stream
-                csv.WriteRecord(QuizReport);
+                // Write the csv data to the memory stream
+                csv.WriteRecords(reportData);
             }
-            // reset  stream position
+
+            // reset stream position
             stream.Position = 0;
 
-            // csv MIMe type: text type
             // return the memory stream as a file
-            return File(stream, "application/octet-stream", $"ReportDaa_{DateTime.Now.ToString("ddMMMyy_HHmmss")}.csv");
-
+            return File(stream, "application/octet-stream", $"ReportData_{DateTime.Now.ToString("ddMMMyy_HHmmss")}.csv");
         }
     }
 }
