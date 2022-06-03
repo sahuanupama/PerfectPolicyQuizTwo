@@ -28,6 +28,10 @@
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.QuestionImage)
+            <div class="col">
+                <img src="~/Uploads/@Html.DisplayFor(Model =>Model.QuestionImage)"
+                     alt="image" width="400px" height="auto" />
+            </div>
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.QuestionImage)
@@ -38,15 +42,9 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.QuizId)
         </dd>
-        @*<dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.options)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.options)
-            </dd>*@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new {/* id = model.q */}) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.QuestionId })|
     <a asp-action="Index">Back to List</a>
 </div>

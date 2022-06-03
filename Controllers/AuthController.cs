@@ -23,6 +23,11 @@ namespace PerfectPolicyQuizTwo.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Store token and render index page.
+        /// </summary>
+        /// <param name="user"> User credentials for the login</param>
+        /// <returns>Index view</returns>
         [HttpPost]
         public IActionResult Login(UserInfo user)
         {
@@ -45,10 +50,13 @@ namespace PerfectPolicyQuizTwo.Controllers
                 // potentially save a message to ViewBag and render in the view
                 return View();
             }
-
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Session finish
+        /// </summary>
+        /// <returns>Index page</returns>
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

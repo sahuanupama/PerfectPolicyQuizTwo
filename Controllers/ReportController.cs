@@ -22,6 +22,10 @@ namespace PerfectPolicyQuizTwo.Controllers
             _client = factory.CreateClient("ApiClient");
         }
 
+        /// <summary>
+        /// Create report and chart for the report generated
+        /// </summary>
+        /// <returns>Quiz count report view</returns>
         public IActionResult QuizCount()
         {
             var response = _client.GetAsync("Report/QuizCountReport").Result;
@@ -53,6 +57,10 @@ namespace PerfectPolicyQuizTwo.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Exported report in csvformat
+        /// </summary>
+        /// <returns>CSV file</returns>
         public IActionResult ExportData()
         {
             // serialise the report data and save in the session.

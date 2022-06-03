@@ -16,21 +16,37 @@ namespace PerfectPolicyQuizTwo.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Loads Help page 
+        /// </summary>
+        /// <returns>Help view</returns>
         public IActionResult Help()
         {
             return View();
         }
 
+        /// <summary>
+        /// Loads home page
+        /// </summary>
+        /// <returns>Index view</returns>
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Loads privacy page
+        /// </summary>
+        /// <returns>Prvacy view</returns>
         public IActionResult Privacy()
         {
             return View();
         }
 
+        /// <summary>
+        /// Loads quiz list 
+        /// </summary>
+        /// <returns>Quiz list view</returns>
         public IActionResult Quiz()
         {
             List<Quiz> quizzes = new();
@@ -49,12 +65,20 @@ namespace PerfectPolicyQuizTwo.Controllers
             return View(quizzes);
         }
 
+        /// <summary>
+        /// Error Page
+        /// </summary>
+        /// <returns>Error View</returns>
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        /// <summary>
+        /// Question list
+        /// </summary>
+        /// <returns>Question list view</returns>
         public IActionResult Question()
         {
             List<Question> questions = new();
@@ -71,6 +95,10 @@ namespace PerfectPolicyQuizTwo.Controllers
             return View(questions);
         }
 
+        /// <summary>
+        /// Option list
+        /// </summary>
+        /// <returns>Option view</returns>
         public IActionResult Option()
         {
             List<Option> options = new();
@@ -84,7 +112,6 @@ namespace PerfectPolicyQuizTwo.Controllers
             {
                 return View();
             }
-
             return View(options);
         }
     }
