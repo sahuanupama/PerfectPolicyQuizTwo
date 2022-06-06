@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Http.Headers;
+using PerfectPolicyQuizTwo.Models.Testing;
 
 namespace PerfectPolicyQuizTwo
 {
@@ -46,9 +47,18 @@ namespace PerfectPolicyQuizTwo
                 opts.Cookie.IsEssential = true;
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+#if TEST
+            services.AddSingleton<TestDatabase>();
+            services.AddScoped<IApiRequest<Quiz>, InMemoryRequest<Quiz>>();
+            services.AddScoped<IApiRequest<Question>, InMemoryRequest<Question>>();
+            services.AddScoped<IApiRequest<Option>, InMemoryRequest<Option>>();
+#else
             services.AddScoped<IApiRequest<Question>, ApiRequest<Question>>();
             services.AddSingleton<IApiRequest<Quiz>, ApiRequest<Quiz>>();
             services.AddSingleton<IApiRequest<Option>, ApiRequest<Option>>();
+#endif
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

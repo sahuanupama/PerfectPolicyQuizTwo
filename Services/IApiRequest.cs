@@ -13,5 +13,8 @@ namespace PerfectPolicyQuizTwo.Services
         public T Edit(string controllerName, T entity, int id);
         public void Delete(string controllerName, int id);
         public List<T> GetAllForParentId(string controllerName, string endpointName, int id);
+
+        public List<T> GetAllForEndpoint(string endpoint);
+        public T GetSingleForEndpoint(string endpoint);
     }
 }

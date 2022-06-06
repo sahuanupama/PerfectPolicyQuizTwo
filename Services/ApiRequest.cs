@@ -89,5 +89,17 @@ namespace PerfectPolicyQuizTwo.Services
 
             return responseEntities;
         }
+
+        List<T> IApiRequest<T>.GetAllForEndpoint(string endpoint)
+        {
+            var response = _client.GetAsync(endpoint).Result;
+            var responseEntities = response.Content.ReadAsAsync<List<T>>().Result;
+            return responseEntities;
+        }
+
+        T IApiRequest<T>.GetSingleForEndpoint(string endpoint)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
